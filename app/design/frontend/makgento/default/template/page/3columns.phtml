@@ -1,0 +1,34 @@
+<head>
+    <?php echo $this->getChildHtml('head') ?>
+</head>
+<body<?php echo $this->getBodyClass()?' class="mage-iphone'.$this->getBodyClass().'"':'' ?> home="index.php" ontouchstart="">
+<?php echo $this->getChildHtml('after_body_start') ?>
+<?php echo $this->getChildHtml('global_notices') ?>
+	<?php echo $this->getChildHtml('header'); ?> 
+    <div class="main-container" data-role="main">
+        <div class="main col-1-layout">
+            <div class="clear"></div>
+            <div id="main" class="col-main">
+            	<?php 
+            		if(!Mage::helper('makgento')->getIsActive()){
+            			echo '<ul class="messages"><li class="error-msg"><ul><li><span>MakGento Mobile Theme is not Enabled</span></li></ul></li></ul>';
+					}
+            	?>
+                <div <?php echo $this->getBodyClass()?' class="mage-iphone'.$this->getBodyClass().'"':'' ?>>
+                    <? if( Mage::getSingleton('cms/page')->getIdentifier() != 'home'  || Mage::app()->getFrontController()->getRequest()->getRouteName() != 'cms') : ?>
+                    	<?php echo $this->getChildHtml('content') ?>
+                    <? else: ?>
+                    	<?php echo $this->getChildHtml('homepage') ?>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <?php echo $this->getChildHtml('footer') ?>
+    <?php echo $this->getChildHtml('before_body_end') ?>
+    <?php echo $this->getAbsoluteFooter() ?>
+</div>
+
+</body>
+</html>

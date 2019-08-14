@@ -1,0 +1,35 @@
+<?php
+	$cookie = Mage::getModel("core/cookie");
+    $iphone = $cookie->get("iphone");
+    $_productCollection = $this->getLoadedProductCollection();
+    $_helper = $this->helper('catalog/output');
+    $img_width=Mage::getStoreConfig('makgento/makgento_grid/makgento_grid_width',Mage::app()->getStore());
+	$img_height=Mage::getStoreConfig('makgento/makgento_grid/makgento_grid_height',Mage::app()->getStore());
+	$items_no=Mage::getStoreConfig('makgento/makgento_grid/makgento_list_items',Mage::app()->getStore());
+	if(isset($items_no)){$itno=$items_no;}else{$itno="grid_two";}
+	if(isset($img_width)){$imgw=$img_width;}else{$imgw=200;}
+	if(isset($img_height)){$imgh=$img_height;}else{$imgh=200;}
+    if(!$_productCollection->getSize()): ?>
+        <p class="note-msg"><?php echo $this->__('There are no products matching the selection.');?></p>
+	<?php else: ?>
+<?php echo $this->getToolbarHtml(); ?>
+<div class="makgento-catalog">
+    <ul class="makgento-grid category-products-grid">
+ 	<?php foreach ($_productCollection as $_product): ?>
+        <li class="makgento-item <?php echo $itno; ?>">
+            <div class="makgento-image">
+               <a href="<?php echo $_product->getProductUrl() ?>">
+               	<img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize($imgw,$imgh); ?>" alt="" />
+               </a>
+             </div> 
+            <div class="makgento-info">
+                <? $name = $_helper->productAttribute($_product, $_product->getName() , 'name'); ?>
+                <h2 class="product-name"><a href="<?php echo $_product->getProductUrl() . "?ios_title=" . $_product->getName() . '&ios_action=hidemenu' ?>"><?=ucwords(strtolower($name))?></a></h2>
+                <div class="prices"><?php echo $this->getPriceHtml($_product, true); ?></div>
+            </div>
+        </li>
+        <?php endforeach; ?>
+    </ul>
+</div>
+<?php endif; ?>
+

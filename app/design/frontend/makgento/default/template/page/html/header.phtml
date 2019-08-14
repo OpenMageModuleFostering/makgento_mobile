@@ -1,0 +1,132 @@
+<?php
+    $logo=Mage::getStoreConfig('makgento/header_footer/logo',Mage::app()->getStore());
+    if (isset($logo)){$logo_img = $logo;}
+    else{$logo_img = '';}
+    
+    if ($logo_img == ''){$logo_img = $this->getLogoSrc();}
+    else {$logo_img = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'makgento/'. $logo_img;}
+	
+?>
+<div class="makgento-content" data-role="page" id="pageone">
+<div class="header">
+	<div class="responsive-nav-link" id="main-menu-drop-up">
+		<div class="mk-burger-icon">
+	          <div class="burger-icon-1"></div>
+	          <div class="burger-icon-2"></div>
+	          <div class="burger-icon-3"></div>
+        </div>
+	</div>
+	<div class="makgento-logo"><a href="<?php echo $this->getUrl('') ?>" class="logo"><img src="<?php echo $logo_img; ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a></div>
+<div class="makgento-search" onclick="open_search();">
+	&emsp;
+</div>
+<div class="makgento-cart">
+	<a href="<?php echo $this->getUrl('checkout/cart')?>">&emsp;<span><?php echo Mage::helper('checkout/cart')->getSummaryCount(); ?></span></a>
+</div>
+</div>
+<div id="main-menu-drop-down" style="display:none">
+	<ul>
+		<?php 
+			$obj = new Mage_Catalog_Block_Navigation();
+        	$storeCategories = $obj->getStoreCategories();
+        	foreach($storeCategories as $categ){
+        		$_category = Mage::getModel('catalog/category')->load($categ->getId());
+        		$categoryChildren = $_category->getChildrenCategories();
+        ?>
+        	<?php if($_category->getIsActive()){ ?>
+        		<li class="main_menu_item_up" cat_id="<?php echo $_category->getId(); ?>" id="menu_down_<?php echo $_category->getId(); ?>" <?php if(count($categoryChildren)>0){ ?>value="true"<?php } ?>>
+					<a href="<?php echo $_category->getUrl(); ?>">
+						<?php echo $_category->getName(); ?>
+					</a>
+				</li>
+				
+				<?php if(count($categoryChildren)>0){ ?>
+					<li style="display:none" id="menu_up_<?php echo $_category->getId(); ?>" class="main_menu_subitem">
+						<ul class="subitem_menu_ul">
+							<?php foreach($categoryChildren as $c){ ?>
+								<?php 
+									$category_url=$c->getUrl();
+									$category_name=$c->getName();
+								?>
+								<li>
+									<a href="<?php echo $category_url; ?>"><?php echo $category_name; ?></a>
+								</li>
+							<?php } ?>
+						</ul>
+					</li>
+				<?php } ?>
+			<?php } ?>
+        <?php
+        	}
+		?>
+	</ul>
+</div>
+<div id="search_box" style="display:none">
+<?php echo $this->getChildHtml('topSearch') ?>
+</div>
+<script>
+jQuery.noConflict();
+jQuery(function($) {
+$("#main-menu-drop-up").click(
+	function(){
+		$("#main-menu-drop-down").toggle('fast',function() {
+			var menu=document.getElementById('main-menu-drop-down');
+			if(menu.style.display=="none"){
+				document.getElementById('main-menu-drop-up').className="responsive-nav-link";
+			}
+			else{
+				document.getElementById('main-menu-drop-up').className="responsive-nav-link active-burger";
+			}
+ 		});
+	}
+);
+$(".main_menu_item_up").click(
+	function(){
+		var catid=$(this).attr('cat_id');
+		var up = "menu_up_"+catid;
+		var down = "menu_down_"+catid;
+		$("#"+up).toggle('fast',function() {
+ 			var menu=document.getElementById(down);
+ 			if(menu.style.display=="none"){
+ 				document.getElementById(down).className="main_menu_item_up";
+ 			}
+ 			else{
+ 				document.getElementById(down).className="main_menu_item_up drop_down";
+ 			}
+  		});
+	}
+);
+
+ 
+});
+	function showMenu(el){
+		var els=document.getElementsByClassName('subcategory');
+		for(var i=0;i<els.length;i++){
+			if(els[i].id==el){
+				if(els[i].style.display=="none"){
+					els[i].style.display="block";
+				}
+				else{
+					els[i].style.display="none";
+				}
+			}
+			else{
+				els[i].style.display="none";
+			}
+		}
+	}
+	function open_search(){
+		var search=document.getElementById('search_box');
+		if(search.style.display=="none"){
+			search.style.display="block";
+			document.getElementById('search').focus();
+			
+		}
+		else{
+			search.style.display="none";
+			document.getElementById('search').blur();
+		}
+		
+	}
+</script>
+

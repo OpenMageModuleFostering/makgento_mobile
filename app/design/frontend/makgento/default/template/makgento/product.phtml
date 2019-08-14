@@ -1,0 +1,146 @@
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_product = $this->getProduct(); ?>
+<script>var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);</script>
+<div id="mobileproductview">
+<?php 
+    $cookie = Mage::getModel("core/cookie");
+    $iphone = $cookie->get("iphone"); 
+    $at=Mage::getStoreConfig('makgento/makgento_product/makgento_product_special_title',Mage::app()->getStore());
+    $atr=Mage::getStoreConfig('makgento/makgento_product/makgento_special_attributes',Mage::app()->getStore());
+    if(isset($at)){$at_title=$at;}else{$at_title="Specifications";}
+    if(isset($atr)){$at_list=explode(',',$atr);}else{$at_list=array("name","price");}
+    if($iphone == 'true') : ?>
+    <form action="<?php echo $this->getSubmitUrl($_product) ."?ios_action=addtocart" ?>" method="post" id="product_addtocart_form"<?php if ($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+    <?php else : ?>
+    
+    <form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if ($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+    <?php endif; ?>
+    <div class="no-display">
+        <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+        <input type="hidden" name="related_product" id="related-products-field" value="" />
+    </div>
+
+    <div class="single-product-page">
+        <div class="row product-shop">
+
+            <div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+
+            <div class="product-img-box">
+                <?php echo $this->getChildHtml('media') ?>
+            </div>
+
+            <?php if($iphone != 'true') : ?>
+                <div class="product small-12 columns">
+                    <? $pname = $_helper->productAttribute($_product, $_product->getName(), 'name'); ?>
+                    <h1 class="product product-name"><?php echo ucwords(strtolower($pname)); ?></h1>
+                </div> 
+            <?php endif; ?>
+
+            <div class="small-12 columns">
+                <div class="product">
+                    <?php echo $this->getChildHtml('alert_urls') ?>
+                    <?php echo $this->getChildHtml('product_type_data') ?>
+                    <?php echo $this->getTierPriceHtml() ?>
+                    <?php echo $this->getChildHtml('extrahint') ?>
+                </div>
+				<div class="row">
+    				<div class="makgento-description">
+    					<div class="makgento-sh" id="des_btn">Description</div>
+    					<div class="makgento-tx" style="display:none" id="desc"><?php echo $_product->getDescription(); ?></div>
+    				</div>
+    				
+        			<div class="makgento-description">
+        				<div class="makgento-sh" id="attr_btn"><?php echo $at_title; ?></div>
+        				<div class="makgento-tx" style="display:none" id="attr">
+						<?php foreach($at_list as $at): 
+							$attribute = $_product->getResource()->getAttribute($at);
+							if ($attribute):
+  						?>
+							<div><span><?php echo $attribute->getStoreLabel(); ?>: </span><?php echo $attribute ->getFrontend()->getValue($_product); ?></div>
+						<?php endif; ?>
+						<?php endforeach; ?>
+	       				</div>
+        			</div>
+        			<?php 
+        			$youtube_video=Mage::getStoreConfig('makgento/makgento_product/video_attribute',Mage::app()->getStore());
+        			if($youtube_video!=""){
+	        			$youtube = $_product->getResource()->getAttribute($youtube_video)->getFrontend()->getValue($_product); 
+    				}
+    				?>
+        			<?php if($youtube!=""){ ?>
+        			<div class="makgento-description">
+        				<div class="makgento-sh" id="video_btn">Video</div>
+        				<div class="makgento-tx" style="display:none" id="video">
+        					<iframe width="100%" height="250" src="//www.youtube.com/embed/<?php echo $youtube; ?>?rel=0" frameborder="0" allowfullscreen></iframe>
+        				</div>
+        			</div>
+        			<?php } ?>
+				</div>
+                <?php if (!$this->hasOptions()): ?>
+                    <div class="add-to-box">
+                        <?php if ($_product->isSaleable()): ?>
+                            <?php echo $this->getChildHtml('addtocart') ?>
+                        <?php endif; ?>
+                    </div>
+                    <?php echo $this->getChildHtml('extra_buttons') ?>
+                <?php elseif (!$_product->isSaleable()): ?>
+                <?php endif; ?>
+               
+                <?php echo $this->getChildHtml('other'); ?>
+                <?php if ($_product->isSaleable() && $this->hasOptions()): ?>
+                    <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
+                <?php endif; ?>
+
+                <div class="clearer"></div>
+                <?php if ($_product->isSaleable() && $this->hasOptions()): ?>
+                    <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
+                <?php endif; ?>
+            </div>
+        </div><!--product shop-->
+    </div><!--row-->
+</form>
+<script type="text/javascript">
+    //<![CDATA[
+    var productAddToCartForm = new VarienForm('product_addtocart_form');
+    productAddToCartForm.submit = function(button, url) {
+        if (this.validator.validate()) {
+            var form = this.form;
+            var oldUrl = form.action;
+
+            if (url) {
+                form.action = url;
+            }
+            var e = null;
+            try {
+                this.form.submit();
+            } catch (e) {
+            }
+            this.form.action = oldUrl;
+            if (e) {
+                throw e;
+            }
+
+            if (button && button != 'undefined') {
+                button.disabled = true;
+            }
+        }
+    }.bind(productAddToCartForm);
+
+    productAddToCartForm.submitLight = function(button, url){
+        if(this.validator) {
+            var nv = Validation.methods;
+            delete Validation.methods['required-entry'];
+            delete Validation.methods['validate-one-required'];
+            delete Validation.methods['validate-one-required-by-name'];
+            if (this.validator.validate()) {
+                if (url) {
+                    this.form.action = url;
+                }
+                this.form.submit();
+            }
+            Object.extend(Validation.methods, nv);
+        }
+    }.bind(productAddToCartForm);
+    //]]>
+</script>
+</div>

@@ -1,0 +1,193 @@
+<layout version="0.1.0">
+	<default translate="label">
+		<reference name="head">
+            <action method="setTemplate" ><template>makgento/head.phtml</template></action>
+        </reference>
+    	<reference name="header">
+            <action method="setTemplate" ><template>makgento/header_mobile.phtml</template></action>
+        </reference>
+        <reference name="footer">
+	        <action method="setTemplate" >
+	   <template>makgento/footer.phtml</template></action>
+	    </reference>
+	    <reference name="content">
+	    	<remove name="breadcrumbs"/>
+	    </reference>
+    </default>
+    <cms_index_index>
+        <reference name="root">
+            <block type="catalog/product_send" name="homepage">
+                <action method="setTemplate"><template>makgento/homepage.phtml</template></action>
+             </block>
+        </reference>
+    </cms_index_index>
+     <catalog_category_default>
+        <reference name="product_list">
+            <action method="setTemplate"><template>makgento/list.phtml</template></action>
+        </reference>
+        <reference name="category.products">
+            <action method="setTemplate"><template>makgento/category.phtml</template></action>
+        </reference>
+    </catalog_category_default>
+    <catalog_category_layered>
+    	<reference name="product_list">
+            <action method="setTemplate"><template>makgento/list.phtml</template></action>
+        </reference>
+        <reference name="category.products">
+            <action method="setTemplate"><template>makgento/category.phtml</template></action>
+        </reference>
+    </catalog_category_layered>
+    <tag_product_list>
+    	<reference name="product_list">
+            <action method="setTemplate"><template>makgento/list.phtml</template></action>
+        </reference>
+        <reference name="category.products">
+            <action method="setTemplate"><template>makgento/category.phtml</template></action>
+        </reference>
+    </tag_product_list>
+    <catalogsearch_result_index>
+    	<reference name="product_list">
+            <action method="setTemplate"><template>makgento/list.phtml</template></action>
+        </reference>
+        <reference name="category.products">
+            <action method="setTemplate"><template>makgento/category.phtml</template></action>
+        </reference>
+    </catalogsearch_result_index>
+    <catalogsearch_advanced_result>
+    	<reference name="product_list">
+            <action method="setTemplate"><template>makgento/list.phtml</template></action>
+        </reference>
+        <reference name="category.products">
+            <action method="setTemplate"><template>makgento/category.phtml</template></action>
+        </reference>
+    </catalogsearch_advanced_result>
+    <catalog_product_view>
+      	<reference name="product.info">
+            <action method="setTemplate"><template>makgento/product.phtml</template></action>
+        </reference>
+		<reference name="product.info.options.wrapper">
+			<action method="setTemplate"><template>makgento/options_wrapper.phtml</template></action>
+		</reference>
+        <reference name="product.info">
+        	<remove name="product.info.addto"/>  
+        	<remove name="product.clone_prices" />
+            <reference name="product.info.media" as="media" before="-">
+                <action method="setTemplate"><template>makgento/media.phtml</template></action>
+            </reference>
+        </reference>
+        <reference name="product.info.related">
+            <action method="setTemplate"><template>makgento/related.phtml</template></action>
+         </reference>
+          <reference name="product.info.additional">
+        <action method="unsetChild"><name>product_tag_list</name></action>
+    	</reference>
+    	<reference name="product.info.addtocart">
+       		<action method="setTemplate"><template>makgento/addtocart.phtml</template></action>
+    	</reference>
+
+    </catalog_product_view>
+    <PRODUCT_TYPE_simple>
+    	<reference name="product.info.simple">
+        	<action method="setTemplate"><template>makgento/default.phtml</template>
+        	</action>
+    	</reference>
+	</PRODUCT_TYPE_simple>
+	<PRODUCT_TYPE_configurable>
+    	<reference name="product.info.configurable">
+        	<action method="setTemplate"><template>makgento/default.phtml</template>
+        	</action>
+    	</reference>
+	</PRODUCT_TYPE_configurable>
+	<checkout_cart_index>
+		<reference name="checkout.cart">
+            <action method="setTemplate"><template>makgento/cart.phtml</template></action>
+        	<action method="addItemRender">
+        		<type>simple</type>
+        		<block>checkout/cart_item_renderer</block>
+        		<template>makgento/item_renderer.phtml</template>
+        	</action>
+        	<action method="addItemRender">
+        		<type>grouped</type>
+        		<block>checkout/cart_item_renderer_grouped</block>
+        		<template>makgento/item_renderer.phtml</template>
+        	</action>
+        	<action method="addItemRender">
+        		<type>configurable</type>
+        		<block>checkout/cart_item_renderer_configurable</block>
+        		<template>makgento/item_renderer.phtml</template>
+        	</action>
+         </reference>
+        
+	</checkout_cart_index>
+	<checkout_onepage_index>
+		<reference name="checkout.onepage">
+	    	<action method="setTemplate"><template>makgento/checkout.phtml</template></action>
+	    </reference>
+	    <reference name="checkout.onepage.login">
+	    	<action method="setTemplate"><template>makgento/checkout_login.phtml</template></action>
+	    </reference>
+	    <reference name="checkout.onepage.billing">
+	    	<action method="setTemplate"><template>makgento/billing.phtml</template></action>
+	    </reference>
+	    <reference name="checkout.onepage.shipping">
+	    	<action method="setTemplate"><template>makgento/shipping.phtml</template></action>
+	    </reference>
+	    <reference name="checkout.onepage.shipping_method">
+	    	<action method="setTemplate"><template>makgento/shipping_method.phtml</template></action>
+	    </reference>
+	    <reference name="checkout.onepage.payment">
+	    	<action method="setTemplate"><template>makgento/payment.phtml</template></action>
+	    </reference>
+    </checkout_onepage_index>
+    <checkout_onepage_review>
+    	<reference name="root">
+	    	<action method="setTemplate"><template>makgento/order_review_info.phtml</template></action>
+	    	<action method="addItemRender"><type>default</type><block>checkout/cart_item_renderer</block><template>makgento/order_review_item.phtml</template></action>
+            <action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>makgento/order_review_item.phtml</template></action>
+            <action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>makgento/order_review_item.phtml</template></action>
+	    </reference>
+	    <reference name="checkout.onepage.review.info.totals">
+	    	<action method="setTemplate"><template>makgento/order_review_totals.phtml</template></action>
+	    </reference>
+    </checkout_onepage_review>
+    <customer_account_login>
+    	<reference name="customer_form_login">
+    		<action method="setTemplate"><template>makgento/login.phtml</template></action>
+        </reference>
+    </customer_account_login>
+    <customer_account_create>
+    	<reference name="customer_form_register">
+    		<action method="setTemplate"><template>makgento/register.phtml</template></action>
+        </reference>
+    </customer_account_create>
+    <contacts_index_index>
+        <reference name="contactForm">
+    		<action method="setTemplate"><template>makgento/contact.phtml</template></action>
+        </reference>
+    </contacts_index_index>
+    <customer_account_index>
+	    <reference name="customer_account_dashboard">
+	    	<action method="setTemplate"><template>makgento/account_dashboard.phtml</template></action>
+	    </reference>
+    </customer_account_index>
+    <customer_account_edit>
+    	<reference name="customer_edit">
+    		<action method="setTemplate"><template>makgento/account_info_edit.phtml</template></action>
+    	</reference>
+    </customer_account_edit>
+    <customer_address_form>
+    	<reference name="customer_address_edit">
+    		<action method="setTemplate"><template>makgento/account_address_edit.phtml</template></action>
+    	</reference>
+    </customer_address_form>
+    <customer_address_index>
+    	<reference name="address_book">
+    		<action method="setTemplate"><template>makgento/account_address_book.phtml</template></action>
+    	</reference>
+    </customer_address_index>
+    <sales_order_history>
+    	<reference name="sales.order.history">
+    		<action method="setTemplate"><template>makgento/account_orders.phtml</template></action>
+    	</reference>
+    </sales_order_history>
+</layout>

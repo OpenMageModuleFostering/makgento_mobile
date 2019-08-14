@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <sections>
+        <makgento translate="label" module="makgento">
+            <label>MakGento Mobile Settings</label>
+            <tab>mkmage</tab>
+            <sort_order>2000</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+            	<general translate="label" module="makgento">
+                    <label>General</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>0</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment>
+					<![CDATA[
+						<style>#row_makgento_general_email_sent{display:none;}</style>
+                    ]]>
+                    </comment>
+                    <fields>
+                        <email translate="label">
+                            <label>Register extension</label>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-email</validate>
+                            <comment>Enter email to register your extension</comment>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </email>
+                        <sent translate="label">
+                            <frontend_type>hidden</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </sent>
+                        <enabled translate="label">
+                            <label>Enable extension</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+                    </fields>
+                    
+            	</general>
+                <header_footer translate="label" module="makgento">
+                    <label>Header and Footer</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <logo translate="label, comment">
+							<label>Logo:</label>
+							<comment><![CDATA[190px wide by 60px]]></comment>
+							<frontend_type>image</frontend_type>
+                            <backend_model>backend/ImageUpload</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">makgento</upload_dir>
+                            <base_url type="media" scope_info="1">makgento</base_url>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</logo>
+                        <footer translate="label, comment">
+                            <label>Footer links:</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <sort_order>7</sort_order>
+                            <source_model>featured/system_config_source_dropdown_footer</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </footer>
+                    </fields>
+                </header_footer>
+                <home_page translate="label" module="makgento">
+                    <label>Home Page</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>2</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                    	<banner translate="label, comment">
+							<label>Banner:</label>
+							<frontend_type>image</frontend_type>
+                            <backend_model>backend/ImageUpload</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">makgento</upload_dir>
+                            <base_url type="media" scope_info="1">makgento</base_url>
+							<sort_order>0</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</banner>
+                   		<featured_title translate="label, comment">
+                            <label>Featured Products Title:</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </featured_title>
+                        <featured_type translate="label, comment">
+                            <label>Featured Type:</label>
+                            <comment><![CDATA[]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>featured/system_config_source_dropdown_categories</source_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </featured_type>
+                        <featured_categories translate="label, comment">
+                            <label>Featured Category:</label>
+                            <comment><![CDATA[]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>featured/system_config_source_dropdown_featured</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </featured_categories>
+						<featured_products translate="label, comment">
+                            <label>Featured Products/Categories:</label>
+                            <comment><![CDATA[Enter the product/category ids, delimited by comma ',']]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </featured_products>
+                        <makgento_category_img translate="label">
+							<label>Category images</label>
+							<comment>Click on the button to add new category image. Max 10 images. Upload the images according to the category ids.</comment>
+							<frontend_type>button</frontend_type>
+							<frontend_model>makgento/adminhtml_system_config_buttoncat</frontend_model>
+							<sort_order>5</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</makgento_category_img>
+                        <makgento_category_images_1 translate="label">
+							<label>Category 1</label>
+							<frontend_type>image</frontend_type>
+							<backend_model>backend/ImageUpload</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">makgento</upload_dir>
+                            <base_url type="media" scope_info="1">makgento</base_url>
+							<sort_order>6</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </makgento_category_images_1>
+                        <makgento_category_images_2 translate="label">
+							<label>Category 2</label>
+							<frontend_type>image</frontend_type>
+							<backend_model>backend/ImageUpload</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">makgento</upload_dir>
+                            <base_url type="media" scope_info="1">makgento</base_url>
+							<sort_order>7</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </makgento_category_images_2>
+                        <makgento_category_images_3 translate="label">
+							<label>Category 3</label>
+							<frontend_type>image</frontend_type>
+							<backend_model>backend/ImageUpload</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">makgento</upload_dir>
+                            <base_url type="media" scope_info="1">makgento</base_url>
+							<sort_order>8</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </makgento_category_images_3>
+                        <makgento_category_images_4 translate="label">
+							<label>Category 4</label>
+							<frontend_type>image</frontend_type>
+							<backend_model>backend/ImageUpload</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">makgento</upload_dir>
+                            <base_url type="media" scope_info="1">makgento</base_url>
+							<sort_order>9</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </makgento_category_images_4>
+                        <makgento_category_images_5 translate="label">
+							<label>Category 5</label>
+							<frontend_type>image</frontend_type>
+							<backend_model>backend/ImageUpload</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">makgento</upload_dir>
+                            <base_url type="media" scope_info="1">makgento</base_url>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </makgento_category_images_5>
+                        <makgento_category_images_6 translate="label">
+							<label>Category 6</label>
+							<frontend_type>image</frontend_type>
+							<backend_model>backend/ImageUpload</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">makgento</upload_dir>
+                            <base_url type="media" scope_info="1">makgento</base_url>
+							<sort_order>11</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </makgento_category_images_6>
+                        <makgento_category_images_7 translate="label">
+							<label>Category 7</label>
+							<frontend_type>image</frontend_type>
+							<backend_model>backend/ImageUpload</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">makgento</upload_dir>
+                            <base_url type="media" scope_info="1">makgento</base_url>
+							<sort_order>12</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </makgento_category_images_7>
+                        <makgento_category_images_8 translate="label">
+							<label>Category 8</label>
+							<frontend_type>image</frontend_type>
+							<backend_model>backend/ImageUpload</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">makgento</upload_dir>
+                            <base_url type="media" scope_info="1">makgento</base_url>
+							<sort_order>13</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </makgento_category_images_8>
+                        <makgento_category_images_9 translate="label">
+							<label>Category 9</label>
+							<frontend_type>image</frontend_type>
+							<backend_model>backend/ImageUpload</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">makgento</upload_dir>
+                            <base_url type="media" scope_info="1">makgento</base_url>
+							<sort_order>14</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </makgento_category_images_9>
+                        <makgento_category_images_10 translate="label">
+							<label>Category 10</label>
+							<frontend_type>image</frontend_type>
+							<backend_model>backend/ImageUpload</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">makgento</upload_dir>
+                            <base_url type="media" scope_info="1">makgento</base_url>
+							<sort_order>15</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </makgento_category_images_10>
+                         <makgento_slides translate="label">
+							<label>Slider images</label>
+							<comment>Click on the button to add new slide. Max 10 slides. Image size 375px x 295px</comment>
+							<frontend_type>button</frontend_type>
+							<frontend_model>makgento/adminhtml_system_config_button</frontend_model>
+							<sort_order>16</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</makgento_slides>
+						<makgento_slide_images_1 translate="label">
+							<label>Slide 1</label>
+							<frontend_type>image</frontend_type>
+							<backend_model>backend/ImageUpload</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">makgento</upload_dir>
+                            <base_url type="media" scope_info="1">makgento</base_url>
+							<sort_order>17</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</makgento_slide_images_1>
+						<makgento_slide_images_2 translate="label">
+							<label>Slide 2</label>
+							<frontend_type>image</frontend_type>
+							<backend_model>backend/ImageUpload</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">makgento</upload_dir>
+                            <base_url type="media" scope_info="1">makgento</base_url>
+							<sort_order>18</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</makgento_slide_images_2>
+						<makgento_slide_images_3 translate="label">
+							<label>Slide 3</label>
+							<frontend_type>image</frontend_type>
+							<backend_model>backend/ImageUpload</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">makgento</upload_dir>
+                            <base_url type="media" scope_info="1">makgento</base_url>
+							<sort_order>19</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</makgento_slide_images_3>
+						<makgento_slide_images_4 translate="label">
+							<label>Slide 4</label>
+							<frontend_type>image</frontend_type>
+							<backend_model>backend/ImageUpload</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">makgento</upload_dir>
+                            <base_url type="media" scope_info="1">makgento</base_url>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</makgento_slide_images_4>
+						<makgento_slide_images_5 translate="label">
+							<label>Slide 5</label>
+							<frontend_type>image</frontend_type>
+							<backend_model>backend/ImageUpload</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">makgento</upload_dir>
+                            <base_url type="media" scope_info="1">makgento</base_url>
+							<sort_order>21</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</makgento_slide_images_5>
+						<makgento_slide_images_6 translate="label">
+							<label>Slide 6</label>
+							<frontend_type>image</frontend_type>
+							<backend_model>backend/ImageUpload</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">makgento</upload_dir>
+                            <base_url type="media" scope_info="1">makgento</base_url>
+							<sort_order>22</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</makgento_slide_images_6>
+						<makgento_slide_images_7 translate="label">
+							<label>Slide 7</label>
+							<frontend_type>image</frontend_type>
+							<backend_model>backend/ImageUpload</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">makgento</upload_dir>
+                            <base_url type="media" scope_info="1">makgento</base_url>
+							<sort_order>23</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</makgento_slide_images_7>
+						<makgento_slide_images_8 translate="label">
+							<label>Slide 8</label>
+							<frontend_type>image</frontend_type>
+							<backend_model>backend/ImageUpload</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">makgento</upload_dir>
+                            <base_url type="media" scope_info="1">makgento</base_url>
+							<sort_order>24</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</makgento_slide_images_8>
+						<makgento_slide_images_9 translate="label">
+							<label>Slide 9</label>
+							<frontend_type>image</frontend_type>
+							<backend_model>backend/ImageUpload</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">makgento</upload_dir>
+                            <base_url type="media" scope_info="1">makgento</base_url>
+							<sort_order>25</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</makgento_slide_images_9>
+						<makgento_slide_images_10 translate="label">
+							<label>Slide 10</label>
+							<frontend_type>image</frontend_type>
+							<backend_model>backend/ImageUpload</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">makgento</upload_dir>
+                            <base_url type="media" scope_info="1">makgento</base_url>
+							<sort_order>26</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</makgento_slide_images_10>
+                    </fields>
+                </home_page>
+                <makgento_grid>
+                	<label>Category Page</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>3</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                    	<makgento_grid_width translate="label">
+                            <label>Product image width resize</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </makgento_grid_width>
+                        <makgento_grid_height translate="label">
+                            <label>Product image height resize</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </makgento_grid_height>
+                        <makgento_list_items translate="label">
+                            <label>Number of products in row</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>featured/system_config_source_dropdown_list</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </makgento_list_items>
+                        
+                    </fields>
+                </makgento_grid>
+                <makgento_product>
+                	<label>Product Page</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>4</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                    	<makgento_product_image_width translate="label">
+                            <label>Product image width resize</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </makgento_product_image_width>
+                        <makgento_product_image_height translate="label">
+                            <label>Product image height resize</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </makgento_product_image_height>
+                        <makgento_product_special_title translate="label, comment">
+                            <label>Special tab title: </label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </makgento_product_special_title>
+                        <makgento_special_attributes translate="label">
+                            <label>Attributes tab</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <sort_order>3</sort_order>
+                            <comment><![CDATA[Select the attributes that you want to show up in the special tab on the product page.]]></comment>
+                            <source_model>featured/system_config_source_dropdown_attributes</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </makgento_special_attributes>
+                        <video_attribute translate="label, comment">
+                            <label>YouTube video attribute ID:</label>
+                            <frontend_type>text</frontend_type>
+                            <comment><![CDATA[Enter the attribute ID for youtube videos. The attribute vaules need to be the video ID.]]></comment>
+                            <sort_order>41</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </video_attribute>
+                        
+                    </fields>
+                </makgento_product>
+            </groups>
+        </makgento>
+    </sections>
+</config> 

@@ -1,0 +1,16 @@
+<div class="dashboard">
+    <div class="page-title">
+        <h1><a href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB); ?>customer/account/">My Account</a></h1>
+    </div>
+    <?php echo $this->getMessagesBlock()->toHtml() ?>
+    <div class="box-account box-info">
+        <ul>
+        	<li><a href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB); ?>customer/account/edit/">Account Information</a></li>
+        	<li><a href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB); ?>customer/address/new/">Address Book</a></li>
+        	<li><a href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB); ?>sales/order/history/">My Orders</a></li>
+        </ul>
+    </div>
+    </div>
+    <?php echo $this->getChildHtml('info1') ?>
+    <?php echo $this->getChildHtml('info2') ?>
+</div>

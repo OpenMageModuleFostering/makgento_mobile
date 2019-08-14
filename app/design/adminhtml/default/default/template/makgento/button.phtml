@@ -1,0 +1,29 @@
+<script type="text/javascript">
+    function addSlide() {
+       for(var i=1;i<11;i++){
+   			var a='row_makgento_home_page_makgento_slide_images_'+i;
+   			var b='makgento_home_page_makgento_slide_images_'+i;
+   			if(document.getElementById(b).value=='' && document.getElementById(a).style.display=='none'){
+   				document.getElementById(a).style.display='table-row';
+   				break;
+   			}
+   		}  	
+    }
+   window.onload=function(){
+   		for(var i=1;i<11;i++){
+   			var a="row_makgento_home_page_makgento_slide_images_"+i;
+   			var b="makgento_home_page_makgento_slide_images_"+i;
+   			if(!document.getElementById(b).getAttribute('value')){
+   				document.getElementById(a).style.display='none';
+   			}
+   			
+   			var a2="row_makgento_home_page_makgento_category_images_"+i;
+   			var b2="makgento_home_page_makgento_category_images_"+i;
+   			if(!document.getElementById(b2).getAttribute('value')){
+   				document.getElementById(a2).style.display='none';
+   			}
+   		}	 	
+   }
+</script>
+ 
+<?php echo $this->getButtonHtml(); ?>
