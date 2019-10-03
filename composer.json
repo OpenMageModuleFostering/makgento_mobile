@@ -1,16 +1,19 @@
 {
-    "name": "OpenMageModuleFostering/makgento_mobile",
+    "name": "OpenMageModuleFostering\/makgento_mobile",
     "type": "magento-module",
     "license": "Open-Software-License-(OSL)",
     "homepage": "",
     "description": "Robust responsive mobile theme for your store.",
     "authors": [
-    {
-        "name": "MkMage",
-        "email": "ilievski156@gmail.com"
-    }
-],
+        {
+            "name": "MkMage",
+            "email": "ilievski156@gmail.com"
+        }
+    ],
     "suggest": {
-        "magento-hackathon/magento-composer-installer": "*"
-    }
+        "magento-hackathon\/magento-composer-installer": "*"
+    },
+    "keywords": [
+        "openmage-module"
+    ]
 }
